@@ -14,6 +14,7 @@ exports.fetchAll = (req, res) => {
       return users;
     })
     .catch((err) => {
+      console.log(err);
       return res.redirect("/");
     });
   const commentsPromise = Comment.find()
@@ -22,6 +23,7 @@ exports.fetchAll = (req, res) => {
       return comments;
     })
     .catch((err) => {
+      console.log(err);
       return res.redirect("/");
     });
   Promise.all([coinsPromise, usersPromise, commentsPromise])
@@ -35,6 +37,7 @@ exports.fetchAll = (req, res) => {
       });
     })
     .catch((err) => {
+      console.log(err);
       res.redirect("/");
     });
 };
@@ -55,6 +58,7 @@ exports.postComment = (req, res) => {
       return res.redirect("/");
     })
     .catch((err) => {
+      console.log(err);
       return res.redirect("/");
     });
 };

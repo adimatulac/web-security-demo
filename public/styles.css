@@ -247,6 +247,10 @@ a.button {
   padding: 1rem 1rem 0 1rem;
 }
 
+.comments-container p {
+  text-align: center;
+}
+
 .comment-box {
   padding: 1rem;
   margin-bottom: 1rem;

@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const dbConfig = require("./config/database.config.js");
 
 // create express app
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express();
 
 // parse requests of content-type - application/x-www-form-urlencoded

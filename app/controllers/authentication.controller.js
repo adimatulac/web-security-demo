@@ -34,6 +34,7 @@ exports.authenticate = (req, res, next) => {
       }
     })
     .catch((err) => {
+      console.log(err);
       return res.redirect("/login?msg=fail");
     });
 };

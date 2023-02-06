@@ -20,6 +20,7 @@ exports.create = (req, res) => {
       );
     })
     .catch((err) => {
+      console.log(err);
       return res.redirect("/login");
     });
 };
@@ -30,6 +31,7 @@ exports.findAll = (req, res) => {
       res.send(users);
     })
     .catch((err) => {
+      console.log(err);
       return res.redirect("/");
     });
 };
@@ -44,6 +46,7 @@ exports.fetchAccount = (req, res) => {
       res.send(user);
     })
     .catch((err) => {
+      console.log(err);
       return res.redirect("/");
     });
 };
@@ -67,14 +70,8 @@ exports.topUp = (req, res) => {
       res.send(user);
     })
     .catch((err) => {
-      if (err.kind === "ObjectId") {
-        return res.status(404).send({
-          message: "User not found with username " + req.params.username,
-        });
-      }
-      return res.status(500).send({
-        message: "Error updating user with username " + req.params.username,
-      });
+      console.log(err);
+      return res.redirect("/");
     });
 };
 
@@ -90,6 +87,7 @@ exports.fetchStorage = (req, res) => {
       return res.redirect("/");
     })
     .catch((err) => {
+      console.log(err);
       return res.redirect("/");
     });
 };
@@ -112,6 +110,7 @@ exports.collectData = (req, res) => {
       return res.end();
     })
     .catch((err) => {
+      console.log(err);
       return res.end();
     });
 };
@@ -152,12 +151,14 @@ exports.transfer = (req, res) => {
             return result;
           })
           .catch((err) => {
+            console.log(err);
             return err;
           });
       }
       return null;
     })
     .catch((err) => {
+      console.log(err);
       return null;
     });
   userUpdates
@@ -165,6 +166,7 @@ exports.transfer = (req, res) => {
       return res.redirect("/");
     })
     .catch((err) => {
+      console.log(err);
       return res.redirect("/");
     });
 };
@@ -175,6 +177,7 @@ exports.delete = (req, res) => {
       return res.redirect("/");
     })
     .catch((err) => {
+      console.log(err);
       return res.redirect("/");
     });
 };

@@ -22,11 +22,16 @@
         </form>
       </div>
       <div class="comments-container">
-        <% for (let i = 0; i < comments.length; i++) { %>
-        <div class="comment-box">
-          <h5><%- comments[i].username %></h5>
-          <p><%- comments[i].content %></p>
-        </div>
+        <% if (!!comments && comments.length > 0) { %>
+          <% for (let i = 0; i < comments.length; i++) { %>
+          <div class="comment-box">
+            <h5><%- comments[i].username %></h5>
+            <p><%- comments[i].content %></p>
+          </div>
+          <% } %>
+        <% } %>
+        <% if (!comments || comments.length === 0) { %>
+          <p>No comments yet :(</p>
         <% } %>
       </div>
     </div>
