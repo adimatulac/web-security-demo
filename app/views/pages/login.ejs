@@ -1,0 +1,28 @@
+<%- include('../partials/head') %>
+<div class="form-card-container">
+  <div class="content-container form-card landing-form card">
+    <form class="vertical-form" action="/authenticate" method="post">
+      <h2>Login</h2>
+      <% if (locals.error) {%>
+      <p class="text-danger"><%=error%></p>
+      <%}%>
+      <input
+        type="text"
+        name="username"
+        id="username"
+        class="form-control"
+        placeholder="username"
+      />
+      <input
+        type="password"
+        name="accessCode"
+        id="accessCode"
+        class="form-control"
+        placeholder="access code"
+      />
+      <button class="button" type="submit">Log In</button>
+    </form>
+    <a class="button button-link" href="/create">Create Account</a>
+  </div>
+</div>
+<%- include('../partials/footer') %>

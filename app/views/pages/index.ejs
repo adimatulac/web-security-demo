@@ -1,0 +1,83 @@
+<%- include('../partials/head') %>
+<div class="header">
+  <a class="button" href="/storage">Storage</a>
+  <a class="button button-link" href="/logout">Logout</a>
+</div>
+<div class="content">
+  <div class="content-column w-66">
+    <div class="content-container card">
+      <img class="product-image" src="https://cdn.shopify.com/s/files/1/0020/1755/8579/products/coddies-classic-fish-flip-flops-shoes-coddies-5-6-men-7-8-women-green-bass-827434_1800x1800.jpg?v=1623952326">
+    </div>
+    <div class="content-container card">
+      <div class="comment-form">
+        <form action="/comments" method="post">
+          <input
+            type="text"
+            name="content"
+            id="content"
+            class="form-control"
+            placeholder="what do you think?"
+          />
+          <button class="button button-group-right" type="submit">Post</button>
+        </form>
+      </div>
+      <div class="comments-container">
+        <% for (let i = 0; i < comments.length; i++) { %>
+        <div class="comment-box">
+          <h5><%- comments[i].username %></h5>
+          <p><%- comments[i].content %></p>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="content-column w-33">
+    <div class="content-container profile card">
+      <div class="profile-info">
+        <h4>profile</h4>
+        <p><%=username%></p>
+        <span>
+          <img class="small-icon" src="https://cdn-icons-png.flaticon.com/512/7846/7846527.png">
+          <h3><%=coins%></h3>
+        </span>
+      </div>
+      <button class="button button-link" onclick="window.location.reload(true);">Refresh</button>
+    </div>
+    <div class="content-container form-card card">
+      <form class="vertical-form" action="/transfer" method="post">
+        <h4>send coins</h4>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          class="form-control"
+          placeholder="username"
+        />
+        <input
+          type="number"
+          name="amount"
+          id="amount"
+          class="form-control"
+          placeholder="amount"
+        />
+        <button class="button" type="submit">Send</button>
+      </form>
+    </div>
+    <div class="content-container card">
+      <h4>friends</h4>
+      <div class="friends-container">
+        <% if (!!friends && friends.length > 0) { %>
+          <% for (let i = 0; i < friends.length; i++) { %>
+          <div class="friend-box">
+            <h5><%- friends[i].username %></h5>
+          </div>
+          <% } %>
+        <% } %>
+        <% if (!friends || friends.length === 0) { %>
+          <p>No friends yet :(</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %>
