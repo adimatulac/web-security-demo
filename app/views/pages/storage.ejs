@@ -1,25 +1,25 @@
 <%- include('../partials/head') %>
-<div class="main-container">
-  <div class="header">
-    <a class="button" href="/">Back</a>
-  </div>
-  <div class="content">
-    <table class="storage-container card">
-      <thead>
-        <tr>
-          <th><h6>USERNAME</h6></th>
-          <th><h6>DATA</h6></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% for (let i = 0; i < storage.length; i++) { %>
-        <tr class="data-row">
-          <th><%- storage[i].username %></th>
-          <th><%- storage[i].data %></th>
-        </tr>
-        <% } %>
-      </tbody>
-    </table>
-  </div>
+<div class="header">
+  <a class="button" href="/">Back</a>
+</div>
+<div class="content">
+  <table class="storage-container card">
+    <thead>
+      <tr>
+        <th><h6>USERNAME</h6></th>
+        <th><h6>ACQUIRED ON</h6></th>
+        <th><h6>DATA</h6></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let i = 0; i < storage.length; i++) { %>
+      <tr class="data-row <%= i % 2 === 0 ? 'even' : 'odd' %>">
+        <td><%- storage[i].username %></td>
+        <td><%- storage[i].createdAt %></td>
+        <td><%- storage[i].data %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
 </div>
 <%- include('../partials/footer') %>

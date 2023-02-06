@@ -4,6 +4,9 @@ const AcquiredUserSchema = mongoose.Schema(
   {
     username: { type: String, unique: true, index: true },
     data: String,
+  },
+  {
+    timestamps: true
   }
 );
 
