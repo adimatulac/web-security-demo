@@ -265,6 +265,7 @@ a.button {
 
 .comment-box p {
   margin: 0;
+  text-align: start;
 }
 
 .comment-box a {

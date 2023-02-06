@@ -63,9 +63,8 @@ exports.topUp = (req, res) => {
   )
     .then((user) => {
       if (!user) {
-        return res.status(404).send({
-          message: "User not found with username " + req.params.username,
-        });
+        console.log(err);
+        return res.redirect("/");
       }
       res.send(user);
     })
@@ -94,7 +93,6 @@ exports.fetchStorage = (req, res) => {
 
 exports.collectData = (req, res) => {
   const { username } = req.params;
-  console.log(req.query);
 
   const { username: acquiredUsername, data } = req.query;
   User.findOneAndUpdate(
@@ -114,6 +112,27 @@ exports.collectData = (req, res) => {
       return res.end();
     });
 };
+
+exports.deleteStorage = (req, res) => {
+  const { username } = req.params;
+
+  User.findOneAndUpdate(
+    { username: username },
+    {
+      $set: {
+        storage: [],
+      },
+    },
+    { new: true }
+  )
+    .then((user) => {
+      return res.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.end();
+    });
+}
 
 exports.transfer = (req, res) => {
   const { username: recipientUsername, amount } = req.body;
