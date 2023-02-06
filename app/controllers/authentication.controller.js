@@ -8,7 +8,7 @@ exports.isAuthenticated = (req, res, next) => {
 exports.authenticate = (req, res, next) => {
   const { username, accessCode } = req.body;
   if (!username || !accessCode) {
-    return res.redirect("/login?msg=fail");
+    return res.redirect("/login?error=invalid");
   }
 
   User.findOne({ username, accessCode })
@@ -18,7 +18,6 @@ exports.authenticate = (req, res, next) => {
         username === user.username &&
         accessCode === user.accessCode
       ) {
-        // saving the data to the cookies + session
         req.session.regenerate((err) => {
           if (err) next(err);
           req.session.user = user;
@@ -27,14 +26,12 @@ exports.authenticate = (req, res, next) => {
             return res.redirect("/");
           });
         });
-        // redirect
       } else {
-        // redirect with a fail msg
-        return res.redirect("/login?msg=fail");
+        return res.redirect("/login?error=invalid");
       }
     })
     .catch((err) => {
       console.log(err);
-      return res.redirect("/login?msg=fail");
+      return res.redirect("/login?error=invalid");
     });
 };

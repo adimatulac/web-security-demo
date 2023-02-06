@@ -3,7 +3,11 @@ const User = require("../models/user.model");
 
 exports.create = (req, res) => {
   if (!req.body.username) {
-    return res.redirect("/create?msg=fail");
+    return res.redirect("/create?error=empty");
+  }
+
+  if (req.body.username.length > 30) {
+    return res.redirect("/create?error=toolong");
   }
 
   const user = new User({

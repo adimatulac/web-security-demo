@@ -1,4 +1,5 @@
 module.exports = (app) => {
+  const messages = require("../constants/messages.js");
   const authentication = require("../controllers/authentication.controller.js");
   const common = require("../controllers/common.controller.js");
 
@@ -7,20 +8,26 @@ module.exports = (app) => {
   app.post("/comments", common.postComment);
 
   app.get("/create", (req, res) => {
-    return res.render("create");
+    let error = req.query.error;
+    console.log(error);
+
+    if (error) {
+      return res.render("create", {
+        error: error === 'toolong' ? messages.toolong : messages.invalid,
+      });
+    } else {
+      return res.render("create");
+    }
   });
 
   app.get("/login", (req, res) => {
-    // check if there is a msg query
-    let bad_auth = req.query.msg ? true : false;
+    let error = req.query.error;
 
-    // if there exists, send the error.
-    if (bad_auth) {
+    if (error) {
       return res.render("login", {
-        error: "Invalid username or password. Please try again.",
+        error: messages.invalid,
       });
     } else {
-      // else just render the login
       return res.render("login");
     }
   });
@@ -36,7 +43,6 @@ module.exports = (app) => {
   });
 
   app.get("/logout", (req, res) => {
-    // clear the cookie + session, redirect to login
     req.session.user = null;
     req.session.save((err) => {
       if (err) next(err);

@@ -202,7 +202,7 @@ a.button {
 }
 
 .button.button-link:hover {
-  background-color: #eaeaf6;
+  background-color: #e4e4eb;
   transform: none;
 }
 
@@ -274,12 +274,12 @@ a.button {
 }
 
 .small-icon {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 }
 
 .profile-info {
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -287,14 +287,25 @@ a.button {
   flex-direction: column;
 }
 
+.profile-info > h3 {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 1rem;
+  padding: 0.625rem;
+  text-align: center;
+  border-radius: 0.375rem;
+  box-sizing: border-box;
+  background-color: #e8e8fd;
+  color: #6062d8;
+}
+
 .profile span {
   display: flex;
   align-items: center;
 }
 
-.profile span h3 {
-  margin: 0;
-  margin-left: 0.375rem;
+.profile span h1 {
+  margin: 0.25rem 0 0 0.375rem;
 }
 
 .profile .button {

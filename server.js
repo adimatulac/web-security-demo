@@ -42,9 +42,8 @@ app.use(
 // parse cookies
 app.use(cookieParser());
 
-//
+// rendering
 app.use(express.static(path.join(__dirname, "/public")));
-
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/app/views/pages"));
 
@@ -68,7 +67,6 @@ require("./app/routes/common.routes.js")(app);
 require("./app/routes/user.routes.js")(app);
 require("./app/routes/authentication.routes.js")(app);
 
-// listen for requests
 app.listen(3000, () => {
   console.log("Server is listening on port " + port);
 });
