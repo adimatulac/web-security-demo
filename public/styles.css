@@ -338,10 +338,6 @@ a.button {
   border-collapse: collapse;
 }
 
-.storage-container tr {
-  border-bottom: 1px solid #566a7f;
-}
-
 .storage-container tr.even {
   background-color: #f3f5f7;
 }

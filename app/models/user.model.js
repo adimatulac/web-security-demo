@@ -12,7 +12,7 @@ const AcquiredUserSchema = mongoose.Schema(
 
 const UserSchema = mongoose.Schema(
   {
-    username: { type: String, unique: true },
+    username: { type: String, unique: true, index: true },
     accessCode: String,
     coins: Number,
     storage: [AcquiredUserSchema]
