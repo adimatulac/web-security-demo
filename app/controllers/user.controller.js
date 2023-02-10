@@ -25,7 +25,7 @@ exports.create = (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      return res.redirect("/login");
+      return res.redirect(`/create?error=${err.code}`);
     });
 };
 
