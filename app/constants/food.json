@@ -1,0 +1,230 @@
+[
+  {
+    "displayName": "Cheddar Cheese Slices",
+    "id": "cheddar_cheese_slices",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Bacon",
+    "id": "bacon",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Banana",
+    "id": "banana",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Barbeque Sauce",
+    "id": "barbeque_sauce",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Butter",
+    "id": "butter",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Bubble Gum",
+    "id": "bubble_gum",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Cabbage",
+    "id": "cabbage",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Chocolate Cereal",
+    "id": "chocolate_cereal",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Cookies",
+    "id": "Cookies",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Egg",
+    "id": "egg",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Can of Fruit",
+    "id": "fruit_can",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Grape Soda",
+    "id": "grape_soda",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Green Grape",
+    "id": "green_grape",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Strawberry Jam",
+    "id": "strawberry_jam",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Ketchup",
+    "id": "ketchup",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Marshmallows",
+    "id": "marshmallows",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Chocolate Bar",
+    "id": "chocolate_bar",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Carton of Milk",
+    "id": "milk_carton",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Mustard",
+    "id": "mustard",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Orange Juice",
+    "id": "orange_juice",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Peanut Butter",
+    "id": "peanut_butter",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Plain Yogurt",
+    "id": "plain_yogurt",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Potato",
+    "id": "potato",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Sour Cream & Onion Chips",
+    "id": "sour_cream_onion_chips",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Strawberry",
+    "id": "strawberry",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Apple",
+    "id": "apple",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Red Grape",
+    "id": "red_grape",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Sausage",
+    "id": "sausage",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Bag of Bread",
+    "id": "bread",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Lemon Soda",
+    "id": "lemon_soda",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Can of Tuna",
+    "id": "tuna_can",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Bottle of Water",
+    "id": "water_bottle",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Watermelon",
+    "id": "watermelon",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Block of Cheese",
+    "id": "cheese_block",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Frosted Cereal",
+    "id": "frosted_cereal",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Potato Chips",
+    "id": "potato_chips",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Salt & Vinegar Chips",
+    "id": "salt_vinegar_chips",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Cola Drink",
+    "id": "cola_drink",
+    "category": "food",
+    "rarityScore": 0
+  }
+]

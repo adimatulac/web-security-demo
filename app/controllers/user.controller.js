@@ -1,5 +1,6 @@
 const utils = require("../../utils");
 const User = require("../models/user.model");
+const Item = require("../models/item.model");
 
 exports.create = (req, res) => {
   if (!req.body.username) {
@@ -10,23 +11,81 @@ exports.create = (req, res) => {
     return res.redirect("/create?error=toolong");
   }
 
-  const user = new User({
-    username: req.body.username,
-    accessCode: utils.generateAccessCode(),
-    coins: 100,
-  });
+  Item.findOne({ id: "gold_piece" })
+    .then((goldPiece) => {
+      Item.aggregate([
+        {
+          $facet: {
+            equipment: [
+              { $match: { category: "equipment" } },
+              { $sample: { size: 2 } },
+            ],
+            food: [{ $match: { category: "food" } }, { $sample: { size: 4 } }],
+            miscellaneous: [
+              { $match: { category: "miscellaneous" } },
+              { $sample: { size: 6 } },
+            ],
+            companion: [
+              { $match: { category: "companion" } },
+              { $sample: { size: 1 } },
+            ],
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            data: {
+              $concatArrays: [
+                "$equipment",
+                "$food",
+                "$miscellaneous",
+                "$companion",
+              ],
+            },
+          },
+        },
+        {
+          $unwind: "$data",
+        },
+        {
+          $replaceRoot: {
+            newRoot: "$data",
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+          },
+        },
+      ])
+        .then((items) => {
+          const user = new User({
+            username: req.body.username,
+            accessCode: utils.generateAccessCode(),
+            inventory: [
+              {
+                item: goldPiece._id,
+                quantity: 100,
+              },
+              ...items.map((item) => ({ item: item._id, quantity: 1 })),
+            ],
+          });
 
-  user
-    .save()
-    .then((data) => {
-      return res.redirect(
-        `/confirm/?username=${data.username}&accessCode=${data.accessCode}`
-      );
+          user
+            .save()
+            .then((data) => {
+              return res.redirect(
+                `/confirm/?username=${data.username}&accessCode=${data.accessCode}`
+              );
+            })
+            .catch((err) => {
+              console.log(err);
+              return res.redirect(`/create?error=${err.code}`);
+            });
+        })
+        .catch((err) => console.log(err));
     })
-    .catch((err) => {
-      console.log(err);
-      return res.redirect(`/create?error=${err.code}`);
-    });
+    .catch((err) => console.log(err));
 };
 
 exports.findAll = (req, res) => {
@@ -42,7 +101,17 @@ exports.findAll = (req, res) => {
 
 exports.fetchAccount = (req, res) => {
   const { username } = req.session.user;
-  User.findOne({ username: username }, { storage: 0 })
+  User.findOne(
+    { username: username },
+    {
+      storage: 0,
+      accessCode: 0,
+      __v: 0,
+      _id: 0,
+      "inventory._id": 0,
+    }
+  )
+    .populate("inventory.item", "-_id -__v -createdAt -updatedAt")
     .then((user) => {
       if (!user) {
         return res.redirect("/");
@@ -136,57 +205,78 @@ exports.deleteStorage = (req, res) => {
       console.log(err);
       return res.end();
     });
-}
+};
 
 exports.transfer = (req, res) => {
-  const { username: recipientUsername, amount } = req.body;
+  const { username: recipientUsername, itemId, amount } = req.body;
   const sender = req.session.user;
 
-  if (!recipientUsername || amount < 0) {
+  if (!recipientUsername || !itemId || amount < 0) {
     return res.redirect("/");
   }
 
-  const userUpdates = User.findOne({ username: recipientUsername })
-    .then((recipient) => {
-      if (recipient) {
-        let transferAmount = amount;
-        let updatedBalance = sender.coins;
-
-        if (transferAmount <= sender.coins) {
-          updatedBalance = sender.coins - transferAmount;
-        } else {
-          transferAmount = sender.coins;
-          updatedBalance = 0;
+  User.find({ username: { $in: [sender.username, recipientUsername] } })
+    .populate("inventory.item")
+    .then((users) => {
+      const senderUser = users.find(
+        (user) => user.username === sender.username
+      );
+      const recipientUser = users.find(
+        (user) => user.username === recipientUsername
+      );
+      if (senderUser && recipientUser) {
+        const senderItemIndex = senderUser.inventory.findIndex(
+          (item) => item.item.id === itemId
+        );
+        const { transferAmount, updatedBalance } = utils.getUpdatedBalances(
+          amount,
+          senderUser.inventory[senderItemIndex].quantity
+        );
+        if (senderItemIndex > -1) {
+          if (updatedBalance > 0) {
+            senderUser.inventory[senderItemIndex].quantity = updatedBalance;
+          } else {
+            senderUser.inventory.splice(senderItemIndex, 1);
+          }
         }
 
-        const senderPromise = User.findOneAndUpdate(
-          { username: sender.username },
-          { coins: updatedBalance },
-          { new: true }
+        const recipientItemIndex = recipientUser.inventory.findIndex(
+          (item) => item.item.id === itemId
         );
-        const recipientPromise = User.findOneAndUpdate(
-          { username: recipientUsername },
-          { $inc: { coins: transferAmount } },
-          { new: true }
-        );
-        return Promise.all([senderPromise, recipientPromise])
-          .then((result) => {
-            return result;
+        let addItemPromise = null;
+        if (recipientItemIndex > -1) {
+          recipientUser.inventory[recipientItemIndex].quantity +=
+            +transferAmount;
+        } else {
+          addItemPromise = Item.findOne({ id: itemId }).then((item) => {
+            recipientUser.inventory.push({
+              item: item._id,
+              quantity: transferAmount,
+            });
+          });
+        }
+
+        Promise.resolve(addItemPromise)
+          .then(() => {
+            senderUser.markModified("inventory");
+            recipientUser.markModified("inventory");
+            const senderPromise = senderUser.save();
+            const recipientPromise = recipientUser.save();
+
+            Promise.all([senderPromise, recipientPromise])
+              .then((data) => {
+                return res.redirect("/");
+              })
+              .catch((err) => {
+                console.log(err);
+                return res.redirect("/");
+              });
           })
           .catch((err) => {
             console.log(err);
-            return err;
+            return res.redirect("/");
           });
       }
-      return null;
-    })
-    .catch((err) => {
-      console.log(err);
-      return null;
-    });
-  userUpdates
-    .then((updates) => {
-      return res.redirect("/");
     })
     .catch((err) => {
       console.log(err);

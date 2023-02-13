@@ -1,0 +1,15 @@
+<%- include('../partials/head') %>
+<div class="inventory-container">
+  <% if (!!items && items.length > 0) { %>
+    <% for (let i = 0; i < items.length; i++) { %>
+    <div class="inventory-item">
+      <img src="/icons/<%- items[i].category %>/<%- items[i].id %>.png">
+      <p><%- items[i].displayName %></p>
+    </div>
+    <% } %>
+  <% } %>
+  <% if (!items || items.length === 0) { %>
+    <p>No items :(</p>
+  <% } %>
+</div>
+<%- include('../partials/footer') %>

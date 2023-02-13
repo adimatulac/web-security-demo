@@ -1,0 +1,218 @@
+[
+  {
+    "displayName": "Wooden Sword",
+    "id": "wooden_sword",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Wooden Staff",
+    "id": "wooden_staff",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Wooden Bow",
+    "id": "wooden_bow",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Wooden Shield",
+    "id": "wooden_shield",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Copper Sword",
+    "id": "copper_sword",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Copper Bow",
+    "id": "copper_bow",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Copper Hammer",
+    "id": "copper_hammer",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Copper Shield",
+    "id": "copper_shield",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Iron Sword",
+    "id": "iron_sword",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Iron Spear",
+    "id": "iron_spear",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Iron Shield",
+    "id": "iron_shield",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Iron Crossbow",
+    "id": "iron_crossbow",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Silver Sword",
+    "id": "silver_sword",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Silver Staff",
+    "id": "silver_staff",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Silver Bow",
+    "id": "silver_bow",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Silver Shield",
+    "id": "silver_shield",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Steel Sword",
+    "id": "steel_sword",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Steel Staff",
+    "id": "steel_staff",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Steel Bow",
+    "id": "steel_bow",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Steel Shield",
+    "id": "steel_shield",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Gold Sword",
+    "id": "gold_sword",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Gold Spear",
+    "id": "gold_spear",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Gold Bow",
+    "id": "gold_bow",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Gold Shield",
+    "id": "gold_shield",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Platinum Sword",
+    "id": "platinum_sword",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Platinum Staff",
+    "id": "platinum_staff",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Platinum Bow",
+    "id": "platinum_bow",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Platinum Shield",
+    "id": "platinum_sword",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Adamantine Sword",
+    "id": "adamantine_sword",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Adamantine Staff",
+    "id": "adamantine_staff",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Adamantine Shield",
+    "id": "adamantine_shield",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Adamantine Bow",
+    "id": "adamantine_bow",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Dragon Sword",
+    "id": "dragon_sword",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Dragon Staff",
+    "id": "dragon_staff",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Dragon Bow",
+    "id": "dragon_bow",
+    "category": "equipment",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Dragon Shield",
+    "id": "dragon_shield",
+    "category": "equipment",
+    "rarityScore": 0
+  }
+]
