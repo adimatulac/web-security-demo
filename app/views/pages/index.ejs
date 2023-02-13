@@ -6,7 +6,19 @@
 <div class="content">
   <div class="content-column w-66">
     <div class="content-container card">
-      <img class="product-image" src="https://cdn.shopify.com/s/files/1/0020/1755/8579/products/coddies-classic-fish-flip-flops-shoes-coddies-5-6-men-7-8-women-green-bass-827434_1800x1800.jpg?v=1623952326">
+      <div class="inventory-container">
+        <% if (!!inventory && inventory.length > 0) { %>
+          <% for (let i = 0; i < inventory.length; i++) { %>
+          <div class="inventory-item">
+            <img src="/icons/<%- inventory[i].item.category %>/<%- inventory[i].item.id %>.png">
+            <p><%- inventory[i].quantity %> <%- inventory[i].item.displayName %></p>
+          </div>
+          <% } %>
+        <% } %>
+        <% if (!inventory || inventory.length === 0) { %>
+          <p>No items in inventory :(</p>
+        <% } %>
+      </div>
     </div>
     <div class="content-container card">
       <div class="comment-form">
@@ -40,16 +52,12 @@
     <div class="content-container profile card">
       <div class="profile-info">
         <h3><%=username%></h3>
-        <span>
-          <img class="small-icon" src="https://cdn-icons-png.flaticon.com/512/7846/7846527.png">
-          <h1><%=coins%></h1>
-        </span>
       </div>
       <button class="button button-link" onclick="window.location.reload(true);">Refresh</button>
     </div>
     <div class="content-container form-card card">
       <form class="vertical-form" action="/transfer" method="post">
-        <h4>send coins</h4>
+        <h4>transfer</h4>
         <input
           type="text"
           name="username"
@@ -57,6 +65,12 @@
           class="form-control"
           placeholder="username"
         />
+        <select name="itemId" id="itemId" class="form-control">
+          <option class="placeholder" value="" disabled selected hidden>item</option>
+          <% for (let i = 0; i < inventory.length; i++) { %>
+          <option value="<%- inventory[i].item.id %>"><%- inventory[i].item.displayName %></option>
+          <% } %>
+        </select>
         <input
           type="number"
           name="amount"

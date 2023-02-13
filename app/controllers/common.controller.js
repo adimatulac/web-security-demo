@@ -3,13 +3,16 @@ const User = require("../models/user.model");
 
 exports.fetchAll = (req, res) => {
   const { username } = req.session.user;
-  const coinsPromise = User.findOne({ username: username }).then((user) => {
-    return user.coins;
-  });
-  const usersPromise = User.find({ username: { $ne: username }}, {
-    username: 1,
-    coins: 1,
-  })
+  const userPromise = User.findOne({ username: username }).populate(
+    "inventory.item"
+  );
+  const usersPromise = User.find(
+    { username: { $ne: username } },
+    {
+      username: 1,
+      coins: 1,
+    }
+  )
     .then((users) => {
       return users;
     })
@@ -26,14 +29,15 @@ exports.fetchAll = (req, res) => {
       console.log(err);
       return res.redirect("/");
     });
-  Promise.all([coinsPromise, usersPromise, commentsPromise])
-    .then((items) => {
-      req.session.user.coins = items[0];
+  Promise.all([userPromise, usersPromise, commentsPromise])
+    .then((fulfilled) => {
+      const user = fulfilled[0];
+      req.session.user = user;
       res.render("index", {
-        username: req.session.user.username,
-        coins: items[0],
-        friends: items[1],
-        comments: items[2],
+        username: user.username,
+        inventory: user.inventory,
+        friends: fulfilled[1],
+        comments: fulfilled[2],
       });
     })
     .catch((err) => {

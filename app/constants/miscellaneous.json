@@ -1,0 +1,152 @@
+[
+  {
+    "displayName": "Bottle of Pink Liquid",
+    "id": "pink_liquid",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Bottle of Purple Liquid",
+    "id": "purple_liquid",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Bottle of Green Liquid",
+    "id": "green_liquid",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Bottle of Gold Liquid",
+    "id": "gold_liquid",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Vial of Grey Liquid",
+    "id": "grey_liquid",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Bottle of Suspicious Liquid",
+    "id": "suspicious_liquid",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Flask of Orange Liquid",
+    "id": "orange_liquid",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Bottle of Dark Blue Liquid",
+    "id": "dark_blue_liquid",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Copper Key",
+    "id": "copper_key",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Silver Key",
+    "id": "silver_key",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Gold Key",
+    "id": "gold_key",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Quill and Ink",
+    "id": "quill_and_ink",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Sealed Scroll",
+    "id": "sealed_scroll",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Strange Fruit",
+    "id": "strange_fruit",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Strange Mushroom",
+    "id": "strange_mushroom",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Box of Bandages",
+    "id": "bandages",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Batteries",
+    "id": "batteries",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Rubber Gloves",
+    "id": "rubber_gloves",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Non-Stick Frying Pan",
+    "id": "frying_pan",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Bottle of Glue",
+    "id": "glue",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Sunscreen",
+    "id": "sunscreen",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Rolling Pin",
+    "id": "rolling_pin",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Rubber Duck",
+    "id": "rubber_duck",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Scissors",
+    "id": "scissors",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Jar of Wax",
+    "id": "wax_jar",
+    "category": "miscellaneous",
+    "rarityScore": 0
+  }
+]

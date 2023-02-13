@@ -1,12 +1,12 @@
 {
-  "name": "hackamole",
+  "name": "fantasy-bank",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+    "start": "NODE_ENV=prod node server.js",
+    "dev": "NODE_ENV=dev nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "body-parser": "^1.20.1",
     "connect-mongodb-session": "^3.1.1",
     "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "express-session": "^1.17.3",

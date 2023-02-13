@@ -1,25 +1,31 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const AcquiredUserSchema = mongoose.Schema(
+const acquiredUserSchema = mongoose.Schema(
   {
     username: { type: String, unique: true, index: true },
     data: String,
-  },
-  {
-    timestamps: true
-  }
-);
-
-const UserSchema = mongoose.Schema(
-  {
-    username: { type: String, unique: true, index: true },
-    accessCode: String,
-    coins: Number,
-    storage: [AcquiredUserSchema]
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("User", UserSchema);
+const userSchema = mongoose.Schema(
+  {
+    username: { type: String, unique: true, index: true },
+    accessCode: String,
+    inventory: [
+      {
+        item: { type: Schema.Types.ObjectId, ref: "Item", required: true },
+        quantity: Number,
+      },
+    ],
+    storage: [acquiredUserSchema],
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = mongoose.model("User", userSchema);

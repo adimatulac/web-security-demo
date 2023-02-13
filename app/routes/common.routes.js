@@ -9,7 +9,6 @@ module.exports = (app) => {
 
   app.get("/create", (req, res) => {
     let error = req.query.error;
-    console.log(error);
 
     if (error) {
       return res.render("create", {
@@ -54,9 +53,10 @@ module.exports = (app) => {
     });
   });
 
-  app.get("/:username/steal-ur-money", (req, res) => {
+  app.get("/:username/steal-ur-stuff", (req, res) => {
     return res.render("phishing-form", {
       username: req.params.username,
+      itemId: req.query.itemId,
       amount: req.query.amount,
     });
   });
