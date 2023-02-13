@@ -22,7 +22,7 @@ let dbUri = "";
 if (env.NODE_ENV === "dev") {
   dbUri = `mongodb+srv://${env.DEV_DB_USERNAME}:${env.DEV_DB_PASSWORD}@${env.DEV_DB_CLUSTER}.mongodb.net/general?retryWrites=true&w=majority`;
 } else if (env.NODE_ENV === "prod") {
-  dbUri = `mongodb+srv://${env.PROD_DB_USERNAME}:${env.PROD_DB_PASSWORD}@${env.PROD_DB_CLUSTER}.mongodb.net/primary?retryWrites=true&w=majority`;
+  dbUri = `mongodb+srv://${env.PROD_DB_USERNAME}:${env.PROD_DB_PASSWORD}@${env.PROD_DB_CLUSTER}.mongodb.net/general?retryWrites=true&w=majority`;
 }
 
 const store = new MongoDBStore({
