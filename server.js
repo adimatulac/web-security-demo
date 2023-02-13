@@ -25,6 +25,8 @@ if (env.NODE_ENV === "dev") {
   dbUri = `mongodb+srv://${env.PROD_DB_USERNAME}:${env.PROD_DB_PASSWORD}@${env.PROD_DB_CLUSTER}.mongodb.net/general?retryWrites=true&w=majority`;
 }
 
+dbUri = "mongodb+srv://admin:ShObK3Hk1nPiHGXu@cluster0.jnjymbb.mongodb.net/general?retryWrites=true&w=majority";
+
 const store = new MongoDBStore({
   uri: dbUri,
   collection: "sessions",
