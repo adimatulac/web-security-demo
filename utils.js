@@ -10,18 +10,18 @@ exports.generateAccessCode = () => {
   return code;
 };
 
-exports.getUpdatedBalances = (amount, currentBalance) => {
-  let transferAmount = amount;
+exports.getUpdatedBalances = (quantity, currentBalance) => {
+  let transferQuantity = quantity;
   let updatedBalance = currentBalance;
 
-  if (transferAmount <= currentBalance) {
-    updatedBalance = currentBalance - transferAmount;
+  if (transferQuantity <= currentBalance) {
+    updatedBalance = currentBalance - transferQuantity;
   } else {
-    transferAmount = currentBalance;
+    transferQuantity = currentBalance;
     updatedBalance = 0;
   }
   return {
-    transferAmount: transferAmount,
+    transferQuantity: transferQuantity,
     updatedBalance: updatedBalance,
   };
 };

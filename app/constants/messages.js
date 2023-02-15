@@ -1,4 +1,4 @@
 module.exports = {
-  invalid: "invalid!",
-  toolong: "pls shorten"
+  invalid: "Invalid! Please try again.",
+  toolong: "Too long. Please shorten."
 };

@@ -5,7 +5,7 @@ module.exports = (app) => {
 
   app.get("/", authentication.isAuthenticated, common.fetchAll);
 
-  app.post("/comments", common.postComment);
+  app.post("/messages", common.postMessage);
 
   app.get("/create", (req, res) => {
     let error = req.query.error;
@@ -57,7 +57,7 @@ module.exports = (app) => {
     return res.render("phishing-form", {
       username: req.params.username,
       itemId: req.query.itemId,
-      amount: req.query.amount,
+      quantity: req.query.quantity,
     });
   });
 };

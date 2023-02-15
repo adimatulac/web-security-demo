@@ -1,11 +1,15 @@
 <%- include('../partials/head') %>
 <div class="header">
-  <a class="button" href="/storage">Storage</a>
-  <a class="button button-link" href="/logout">Logout</a>
+  <a href="/storage">
+    <button class="button">Storage</button>
+  </a>
+  <a href="/logout">
+    <button class="button warning">Log Out</button>
+  </a>
 </div>
 <div class="content">
   <div class="content-column w-66">
-    <div class="content-container card">
+    <div class="inventory content-container card">
       <div class="inventory-container">
         <% if (!!inventory && inventory.length > 0) { %>
           <% for (let i = 0; i < inventory.length; i++) { %>
@@ -20,74 +24,74 @@
         <% } %>
       </div>
     </div>
-    <div class="content-container card">
-      <div class="comment-form">
-        <form action="/comments" method="post">
+    <div class="message-board content-container card">
+      <div class="message-form">
+        <form action="/messages" method="post">
           <input
             type="text"
             name="content"
             id="content"
             class="form-control"
-            placeholder="what do you think?"
+            placeholder="Howdy!"
           />
-          <button class="button button-group-right" type="submit">Post</button>
+          <button class="button" type="submit">Post</button>
         </form>
       </div>
-      <div class="comments-container">
-        <% if (!!comments && comments.length > 0) { %>
-          <% for (let i = 0; i < comments.length; i++) { %>
-          <div class="comment-box">
-            <h5><%- comments[i].username %></h5>
-            <p><%- comments[i].content %></p>
-          </div>
+      <div class="messages-container">
+        <% if (!!messages && messages.length > 0) { %>
+          <% for (let i = 0; i < messages.length; i++) { %>
+            <div class="message-box" style="transform: rotate(<%= messages[i].rotation %>deg)">
+              <span class="nail" style="right: calc(50% + <%= messages[i].rotation %>rem)"></span>
+              <h4><%- messages[i].username %></h4>
+              <p><%- messages[i].content %></p>
+            </div>
           <% } %>
         <% } %>
-        <% if (!comments || comments.length === 0) { %>
-          <p>No comments yet :(</p>
+        <% if (!messages || messages.length === 0) { %>
+          <p>No messages yet :(</p>
         <% } %>
       </div>
     </div>
   </div>
   <div class="content-column w-33">
-    <div class="content-container profile card">
-      <div class="profile-info">
-        <h3><%=username%></h3>
-      </div>
-      <button class="button button-link" onclick="window.location.reload(true);">Refresh</button>
+    <div class="content-container profile">
+      <h3><%=username%></h3>
+      <button class="button" onclick="window.location.reload(true);">Refresh</button>
     </div>
-    <div class="content-container form-card card">
+    <div class="metal content-container form-card card">
       <form class="vertical-form" action="/transfer" method="post">
-        <h4>transfer</h4>
+        <h3 class="title">Transfer</h3>
         <input
           type="text"
           name="username"
           id="username"
           class="form-control"
-          placeholder="username"
+          placeholder="Username"
         />
         <select name="itemId" id="itemId" class="form-control">
-          <option class="placeholder" value="" disabled selected hidden>item</option>
+          <option class="placeholder" value="" disabled selected hidden>Item</option>
           <% for (let i = 0; i < inventory.length; i++) { %>
           <option value="<%- inventory[i].item.id %>"><%- inventory[i].item.displayName %></option>
           <% } %>
         </select>
         <input
           type="number"
-          name="amount"
-          id="amount"
+          name="quantity"
+          id="quantity"
           class="form-control"
-          placeholder="amount"
+          placeholder="Quantity"
         />
-        <button class="button" type="submit">Send</button>
+        <button class="button" type="submit">Transfer</button>
       </form>
     </div>
-    <div class="content-container card">
-      <h4>friends</h4>
+    <div class="message-board content-container card users">
+      <h3 class="title">Friends</h3>
       <div class="friends-container">
+        <span class="nail"></span>
         <% if (!!friends && friends.length > 0) { %>
           <% for (let i = 0; i < friends.length; i++) { %>
           <div class="friend-box">
-            <h5><%- friends[i].username %></h5>
+            <p><%- friends[i].username %></p>
           </div>
           <% } %>
         <% } %>

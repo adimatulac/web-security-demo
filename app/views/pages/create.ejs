@@ -1,6 +1,6 @@
 <%- include('../partials/head') %>
 <div class="form-card-container">
-  <div class="content-container form-card landing-form card">
+  <div class="content-container form-card landing-form card metal">
     <form class="vertical-form" action="/users" method="post">
       <h2>Create Account</h2>
       <% if (locals.error) {%>
@@ -11,11 +11,11 @@
         name="username"
         id="username"
         class="form-control"
-        placeholder="username"
+        placeholder="Username"
       />
       <button class="button" type="submit">Create</button>
     </form>
-    <a class="button button-link" href="/login">Back to Login</a>
+    <a class="link" href="/login">Back to Login</a>
   </div>
 </div>
 <%- include('../partials/footer') %>

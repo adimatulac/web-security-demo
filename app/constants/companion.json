@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "displayName": "Gold Piece",
+    "id": "gold_piece",
+    "category": "currency",
+    "rarityScore": 0
+  }
+]

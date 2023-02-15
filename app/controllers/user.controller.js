@@ -18,9 +18,9 @@ exports.create = (req, res) => {
           $facet: {
             equipment: [
               { $match: { category: "equipment" } },
-              { $sample: { size: 2 } },
+              { $sample: { size: 3 } },
             ],
-            food: [{ $match: { category: "food" } }, { $sample: { size: 4 } }],
+            food: [{ $match: { category: "food" } }, { $sample: { size: 6 } }],
             miscellaneous: [
               { $match: { category: "miscellaneous" } },
               { $sample: { size: 6 } },
@@ -208,10 +208,10 @@ exports.deleteStorage = (req, res) => {
 };
 
 exports.transfer = (req, res) => {
-  const { username: recipientUsername, itemId, amount } = req.body;
+  const { username: recipientUsername, itemId, quantity } = req.body;
   const sender = req.session.user;
 
-  if (!recipientUsername || !itemId || amount < 0) {
+  if (!recipientUsername || !itemId || quantity < 0) {
     return res.redirect("/");
   }
 
@@ -228,8 +228,8 @@ exports.transfer = (req, res) => {
         const senderItemIndex = senderUser.inventory.findIndex(
           (item) => item.item.id === itemId
         );
-        const { transferAmount, updatedBalance } = utils.getUpdatedBalances(
-          amount,
+        const { transferQuantity, updatedBalance } = utils.getUpdatedBalances(
+          quantity,
           senderUser.inventory[senderItemIndex].quantity
         );
         if (senderItemIndex > -1) {
@@ -246,12 +246,12 @@ exports.transfer = (req, res) => {
         let addItemPromise = null;
         if (recipientItemIndex > -1) {
           recipientUser.inventory[recipientItemIndex].quantity +=
-            +transferAmount;
+            +transferQuantity;
         } else {
           addItemPromise = Item.findOne({ id: itemId }).then((item) => {
             recipientUser.inventory.push({
               item: item._id,
-              quantity: transferAmount,
+              quantity: transferQuantity,
             });
           });
         }

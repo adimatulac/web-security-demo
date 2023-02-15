@@ -1,4 +1,4 @@
-const Comment = require("../models/comment.model");
+const Message = require("../models/message.model");
 const User = require("../models/user.model");
 
 exports.fetchAll = (req, res) => {
@@ -20,16 +20,16 @@ exports.fetchAll = (req, res) => {
       console.log(err);
       return res.redirect("/");
     });
-  const commentsPromise = Comment.find()
+  const messagesPromise = Message.find()
     .sort({ createdAt: -1 })
-    .then((comments) => {
-      return comments;
+    .then((messages) => {
+      return messages;
     })
     .catch((err) => {
       console.log(err);
       return res.redirect("/");
     });
-  Promise.all([userPromise, usersPromise, commentsPromise])
+  Promise.all([userPromise, usersPromise, messagesPromise])
     .then((fulfilled) => {
       const user = fulfilled[0];
       req.session.user = user;
@@ -37,7 +37,7 @@ exports.fetchAll = (req, res) => {
         username: user.username,
         inventory: user.inventory,
         friends: fulfilled[1],
-        comments: fulfilled[2],
+        messages: fulfilled[2],
       });
     })
     .catch((err) => {
@@ -46,17 +46,18 @@ exports.fetchAll = (req, res) => {
     });
 };
 
-exports.postComment = (req, res) => {
+exports.postMessage = (req, res) => {
   if (!req.body.content) {
     return res.redirect("/");
   }
 
-  const comment = new Comment({
+  const message = new Message({
     username: req.session.user.username,
     content: req.body.content,
+    rotation: Math.random() * 1.5 * (Math.round(Math.random()) ? 1 : -1),
   });
 
-  comment
+  message
     .save()
     .then((data) => {
       return res.redirect("/");
