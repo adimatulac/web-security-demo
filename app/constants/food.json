@@ -226,5 +226,17 @@
     "id": "cola_drink",
     "category": "food",
     "rarityScore": 0
+  },
+  {
+    "displayName": "Roast Chicken",
+    "id": "roast_chicken",
+    "category": "food",
+    "rarityScore": 0
+  },
+  {
+    "displayName": "Steak",
+    "id": "steak",
+    "category": "food",
+    "rarityScore": 0
   }
 ]
