@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const acquiredUserSchema = mongoose.Schema(
   {
-    username: { type: String, unique: true, index: true },
+    username: String,
     data: String,
   },
   {
