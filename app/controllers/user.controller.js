@@ -11,79 +11,77 @@ exports.create = (req, res) => {
     return res.redirect("/create?error=toolong");
   }
 
-  Item.findOne({ id: "gold_piece" })
-    .then((goldPiece) => {
-      Item.aggregate([
-        {
-          $facet: {
-            equipment: [
-              { $match: { category: "equipment" } },
-              { $sample: { size: 3 } },
-            ],
-            food: [{ $match: { category: "food" } }, { $sample: { size: 6 } }],
-            miscellaneous: [
-              { $match: { category: "miscellaneous" } },
-              { $sample: { size: 6 } },
-            ],
-            companion: [
-              { $match: { category: "companion" } },
-              { $sample: { size: 1 } },
-            ],
-          },
+  Item.aggregate([
+    {
+      $facet: {
+        currency: [{ $match: { id: "gold_piece" } }],
+        equipment: [
+          { $match: { category: "equipment" } },
+          { $sample: { size: 3 } },
+        ],
+        food: [{ $match: { category: "food" } }, { $sample: { size: 6 } }],
+        miscellaneous: [
+          { $match: { category: "miscellaneous" } },
+          { $sample: { size: 6 } },
+        ],
+        companion: [
+          { $match: { category: "companion" } },
+          { $sample: { size: 1 } },
+        ],
+      },
+    },
+    {
+      $project: {
+        _id: 0,
+        data: {
+          $concatArrays: [
+            "$currency",
+            "$equipment",
+            "$food",
+            "$miscellaneous",
+            "$companion",
+          ],
         },
-        {
-          $project: {
-            _id: 0,
-            data: {
-              $concatArrays: [
-                "$equipment",
-                "$food",
-                "$miscellaneous",
-                "$companion",
-              ],
-            },
-          },
-        },
-        {
-          $unwind: "$data",
-        },
-        {
-          $replaceRoot: {
-            newRoot: "$data",
-          },
-        },
-        {
-          $project: {
-            _id: 1,
-          },
-        },
-      ])
-        .then((items) => {
-          const user = new User({
-            username: req.body.username,
-            accessCode: utils.generateAccessCode(),
-            inventory: [
-              {
-                item: goldPiece._id,
-                quantity: 100,
-              },
-              ...items.map((item) => ({ item: item._id, quantity: 1 })),
-            ],
-          });
+      },
+    },
+    {
+      $unwind: "$data",
+    },
+    {
+      $replaceRoot: {
+        newRoot: "$data",
+      },
+    },
+    {
+      $project: {
+        _id: 1,
+        id: 1,
+      },
+    },
+  ])
+    .then((items) => {
+      const user = new User({
+        username: req.body.username,
+        accessCode: utils.generateAccessCode(),
+        inventory: [
+          ...items.map((item) => ({
+            item: item._id,
+            quantity: item.id === "gold_piece" ? 100 : 1,
+          })),
+        ],
+      });
 
-          user
-            .save()
-            .then((data) => {
-              return res.redirect(
-                `/confirm/?username=${data.username}&accessCode=${data.accessCode}`
-              );
-            })
-            .catch((err) => {
-              console.log(err);
-              return res.redirect(`/create?error=${err.code}`);
-            });
+      user
+        .save()
+        .then((data) => {
+          return res.redirect(
+            `/confirm/?username=${data.username}&accessCode=${data.accessCode}`
+          );
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          return res.redirect(`/create?error=${err.code}`);
+        });
     })
     .catch((err) => console.log(err));
 };
@@ -124,29 +122,6 @@ exports.fetchAccount = (req, res) => {
     });
 };
 
-exports.topUp = (req, res) => {
-  if (!req.params.username) {
-    return res.redirect("/");
-  }
-
-  User.findOneAndUpdate(
-    { username: req.params.username },
-    { coins: req.body.coins },
-    { new: true }
-  )
-    .then((user) => {
-      if (!user) {
-        console.log(err);
-        return res.redirect("/");
-      }
-      res.send(user);
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.redirect("/");
-    });
-};
-
 exports.fetchStorage = (req, res) => {
   const { username } = req.session.user;
   User.findOne({ username: username })
@@ -166,24 +141,29 @@ exports.fetchStorage = (req, res) => {
 
 exports.collectData = (req, res) => {
   const { username } = req.params;
+  const { username: sessionUser } = req.session.user;
 
-  const { username: acquiredUsername, data } = req.query;
-  User.findOneAndUpdate(
-    { username: username },
-    {
-      $push: {
-        storage: { username: acquiredUsername, data: data },
+  if (sessionUser !== username) {
+    const { username: acquiredUsername, data } = req.query;
+    User.findOneAndUpdate(
+      { username: username },
+      {
+        $push: {
+          storage: { username: acquiredUsername, data: data },
+        },
       },
-    },
-    { new: true }
-  )
-    .then((user) => {
-      return res.end();
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.end();
-    });
+      { new: true }
+    )
+      .then((user) => {
+        return res.end();
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.end();
+      });
+  } else {
+    return res.end();
+  }
 };
 
 exports.deleteStorage = (req, res) => {

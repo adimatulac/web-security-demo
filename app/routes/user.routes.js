@@ -3,7 +3,6 @@ module.exports = (app) => {
   const authentication = require("../controllers/authentication.controller.js");
 
   app.post("/users", users.create);
-
   // app.get("/users", users.findAll);
   // app.put("/users/:username", users.topUp);
 

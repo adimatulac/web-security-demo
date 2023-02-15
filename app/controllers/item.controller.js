@@ -1,35 +1,46 @@
 const Item = require("../models/item.model");
 
 exports.add = (req, res) => {
+  let invalidFound = false;
   let items = req.body.map((item) => {
+    const { id } = item;
+    if (!id) {
+      invalidFound = true;
+    }
     return {
-      displayName: item.displayName,
+      displayName: item.displayName || "",
       id: item.id,
-      rarityScore: item.rarityScore,
-      category: item.category,
+      rarityScore: item.rarityScore || 0,
+      category: item.category || "miscellaneous",
     };
   });
 
-  Item.insertMany(items)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.end();
+  if (invalidFound) {
+    return res.status(400).send({
+      message: "Missing item ID.",
     });
+  } else {
+    Item.insertMany(items)
+      .then((data) => {
+        return res.send(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.end();
+      });
+  }
 };
 
 exports.fetchAll = (req, res) => {
   Item.find()
     .then((items) => {
       return res.render("items", {
-        items: items
+        items: items,
       });
     })
     .catch((err) => {
       console.log(err);
-      res.end();
+      return res.end();
     });
 };
 
@@ -37,6 +48,7 @@ exports.fetchRandom = (req, res) => {
   Item.aggregate([
     {
       $facet: {
+        currency: [{ $match: { id: "gold_piece" } }],
         equipment: [
           { $match: { category: "equipment" } },
           { $sample: { size: 2 } },
@@ -57,6 +69,7 @@ exports.fetchRandom = (req, res) => {
         _id: 0,
         data: {
           $concatArrays: [
+            "currency",
             "$equipment",
             "$food",
             "$miscellaneous",
@@ -75,13 +88,15 @@ exports.fetchRandom = (req, res) => {
     },
     {
       $project: {
-        _id: 1
-      }
-    }
+        _id: 1,
+      },
+    },
   ])
     .then((items) => {
-      console.log("LOGGING: ", items);
-      res.end();
+      return res.end();
     })
-    .catch((err) => res.end());
+    .catch((err) => {
+      console.log(err);
+      return res.end();
+    });
 };

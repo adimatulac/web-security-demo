@@ -1,18 +1,16 @@
 module.exports = (app) => {
-  const messages = require("../constants/messages.js");
+  const feedback = require("../constants/feedback.js");
   const authentication = require("../controllers/authentication.controller.js");
   const common = require("../controllers/common.controller.js");
 
   app.get("/", authentication.isAuthenticated, common.fetchAll);
-
-  app.post("/messages", common.postMessage);
 
   app.get("/create", (req, res) => {
     let error = req.query.error;
 
     if (error) {
       return res.render("create", {
-        error: error === 'toolong' ? messages.toolong : messages.invalid,
+        error: error === 'toolong' ? feedback.toolong : feedback.invalid,
       });
     } else {
       return res.render("create");
@@ -24,7 +22,7 @@ module.exports = (app) => {
 
     if (error) {
       return res.render("login", {
-        error: messages.invalid,
+        error: feedback.invalid,
       });
     } else {
       return res.render("login");

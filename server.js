@@ -74,6 +74,7 @@ db.on("error", (err) => {
 require("./app/routes/common.routes.js")(app);
 require("./app/routes/user.routes.js")(app);
 require("./app/routes/item.routes.js")(app);
+require("./app/routes/message.routes.js")(app);
 require("./app/routes/authentication.routes.js")(app);
 
 app.listen(3000, () => {
