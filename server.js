@@ -8,15 +8,16 @@ const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const mongoose = require("mongoose");
 
-// create express app
 const port = env.PORT || 3000;
 const app = express();
 
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// parse requests of content-type - application/json
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, "/public")));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/app/views/pages"));
 
 let dbUri = "";
 if (env.NODE_ENV === "dev") {
@@ -24,8 +25,6 @@ if (env.NODE_ENV === "dev") {
 } else if (env.NODE_ENV === "prod") {
   dbUri = `mongodb+srv://${env.PROD_DB_USERNAME}:${env.PROD_DB_PASSWORD}@${env.PROD_DB_CLUSTER}.mongodb.net/general?retryWrites=true&w=majority`;
 }
-
-// dbUri = "mongodb+srv://admin:ShObK3Hk1nPiHGXu@cluster0.jnjymbb.mongodb.net/general?retryWrites=true&w=majority";
 
 const store = new MongoDBStore({
   uri: dbUri,
@@ -36,7 +35,6 @@ store.on("error", (error) => {
   console.log(error);
 });
 
-// set session
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(
   session({
@@ -49,15 +47,6 @@ app.use(
   })
 );
 
-// parse cookies
-app.use(cookieParser());
-
-// set views
-app.use(express.static(path.join(__dirname, "/public")));
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "/app/views/pages"));
-
-// db config
 mongoose.Promise = global.Promise;
 mongoose.connect(dbUri);
 
@@ -70,7 +59,6 @@ db.on("error", (err) => {
   console.error("connection error: ", err);
 });
 
-// set routes
 require("./app/routes/common.routes.js")(app);
 require("./app/routes/user.routes.js")(app);
 require("./app/routes/item.routes.js")(app);
