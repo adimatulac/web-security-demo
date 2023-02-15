@@ -71,6 +71,7 @@ h6 {
 .confirm-card {
   width: 100%;
   max-width: 400px;
+  margin-top: 2rem;
 }
 
 .vertical-form {
@@ -215,7 +216,8 @@ a.button {
   color: #07376f;
 }
 
-.form-control {
+select.form-control,
+input.form-control {
   display: block;
   width: 100%;
   padding: 0.4375rem 0.875rem;
@@ -450,7 +452,9 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:focus {
+input:-internal-autofill-selected,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
   transition: background-color 600000s 0s, color 600000s 0s;
 }
